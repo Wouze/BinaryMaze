@@ -1,0 +1,6 @@
+
+class MNode<T> {
+	public T data;
+	public MNode<T> left, right;
+
+}
