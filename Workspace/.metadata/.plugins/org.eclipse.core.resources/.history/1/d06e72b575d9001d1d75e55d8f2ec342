@@ -23,7 +23,7 @@ class MNode<T> {
 //	For example, In the maze shown above, the shortest path is: “B-T-S-S-X”
 	private String shortest() {return null;}
 	
-	public static String translateToLeftRight(String path) {
+	public String translateToLeftRight(String path) {
 		String newPath = "";
 		String side = "left";
 
@@ -43,7 +43,7 @@ class MNode<T> {
 						newPath += "R";
 						side = "right";
 					} else {
-						newPath += "L";
+						newPath += "T";
 						side = "left";
 					}
 					break;					

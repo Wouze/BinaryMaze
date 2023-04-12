@@ -50,6 +50,7 @@ class MNode<T> {
 				}
 				default:{
 					newPath += path.charAt(i);
+					break;
 				}
 			}
 		}

@@ -43,7 +43,7 @@ class MNode<T> {
 						newPath += "R";
 						side = "right";
 					} else {
-						newPath += "L";
+						newPath += "T";
 						side = "left";
 					}
 					break;					
