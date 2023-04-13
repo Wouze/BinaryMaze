@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+C:\Users\m-ohm\Desktop\java\java csc212 project (binary tree)\Workspace\.metadata\.plugins\org.eclipse.jdt.core
-1865797976.index
-1401970613.index
-3413725848.index
