@@ -1,7 +1,7 @@
 
 class MNode<T> {
 	public T data;
-//	public MNode<T> left, right;
+	public MNode<T> left, right;
 	
 	
 //	Write the method private boolean follow(MNode <T> t, String path), which tests
