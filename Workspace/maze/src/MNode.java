@@ -24,36 +24,36 @@ class MNode<T> {
 	private String shortest() {return null;}
 	
 	public static String translateToLeftRight(String path) {
-		String newPath = "";
+		StringBuilder newPath = new StringBuilder();
 		String side = "left";
 
 		for (int i = 0; i < path.length(); i++) {
 			switch (path.charAt(i)) {
 				case 'S': {
-					if (side == "left") {
-						newPath += "L";
+					if (side.equals("left")) {
+						newPath.append("L");
 					} else {
-						newPath += "R";
+						newPath.append("R");
 					}
 					break;
 				}
-				
+
 				case 'T': {
-					if (side == "left") {
-						newPath += "R";
+					if (side.equals("left")) {
+						newPath.append("R");
 						side = "right";
 					} else {
-						newPath += "L";
+						newPath.append("L");
 						side = "left";
 					}
-					break;					
+					break;
 				}
 				default:{
-					newPath += path.charAt(i);
+					newPath.append(path.charAt(i));
 				}
 			}
 		}
 
-		return newPath;
+		return newPath.toString();
 	}
 }
