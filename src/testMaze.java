@@ -6,7 +6,7 @@ public class testMaze {
 		// TODO Auto-generated method stub
 		String nn = "BTTSTTTX";
 		
-		System.out.println(MNode.translateToLeftRight(nn));
+		System.out.println(MazeSolver.translateToLeftRight(nn));
 		
 		
 	}
