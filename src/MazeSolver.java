@@ -19,7 +19,7 @@ public class MazeSolver<T> {
 	
 //	Write the method private String short(), which returns the shortest path to an exit
 //	starting at the root.
-//	For example, In the maze shown above, the shortest path is: “B-T-S-S-X”
+//	For example, In the maze shown above, the shortest path is: "B-T-S-S-X"
 	private String shortest() {return null;}
 	
 	public static String translateToLeftRight(String path) {
