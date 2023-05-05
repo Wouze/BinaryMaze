@@ -8,47 +8,99 @@ public class MazeSolver<T> {
 //	directions are available (not necessarily leading to an exit).
 //	For example, In the maze shown above, the paths: "T-T", "T-T-X", "S-T" are valid,
 //	whereas the paths "S-T-X" and "S-T-S" are not valid.
-	private boolean follow(MNode <T> t, String path)
-	{return true;}
-	
+	private boolean follow(MNode <T> t, String path){
+		String new_path = translateToLeftRight(path);
+
+		for (int i= 0; i<new_path.length(); i++){
+			switch (new_path.charAt(i)){
+
+				case 'R':
+					if (t.right == null)
+						return false;
+					t = t.right;
+					break;
+
+				case 'L':
+					if (t.left == null)
+						return false;
+					t = t.left;
+					break;
+				
+				case 'X':
+					if (!t.data.equals('X'))
+						return false;
+					break;
+					
+				case 'B':
+					if (!t.data.equals('B'))
+						return false;
+					break;
+			}
+		}
+
+		return true;
+	}
 	
 //	Write the method private boolean escape(MNode <T> t), which searches for an
 //	exit starting at t using preorder traversal and returns true if it finds one. 
-	private boolean escape(MNode <T> t)
-	{return true;}
-	
+	private boolean escape(MNode <T> t) {
+		if (t == null) return false;
+		if (t.data.equals('X')) return true;
+		
+		return escape(t.left) || escape(t.right);
+	}
+
 //	Write the method private String short(), which returns the shortest path to an exit
 //	starting at the root.
 //	For example, In the maze shown above, the shortest path is: "B-T-S-S-X"
-	private String shortest() {return null;}
+	private String shortest() {
+		if (root == null) return "";
+
+		return findShortest(root);
+	}
+
+	private String findShortest(MNode <T> t){
+		String left = "";
+		String right = "";
+		
+		if (!escape(t)) return "";
+		if (escape(t.left)){
+			left = "L" + findShortest(t.left);
+		}
+		if (escape(t.right)){
+			right = "R" + findShortest(t.right);
+		}
+		
+		return right.length() > left.length()?right:left;
+	}
 	
 	public static String translateToLeftRight(String path) {
-		StringBuilder newPath = new StringBuilder();
+		String newPath = "";
 		String side = "left";
 
 		for (int i = 0; i < path.length(); i++) {
 			switch (path.charAt(i)) {
 				case 'S': {
 					if (side.equals("left")) {
-						newPath.append("L");
+						newPath += "L";
 					} else {
-						newPath.append("R");
+						newPath += "R";
 					}
 					break;
 				}
 
 				case 'T': {
 					if (side.equals("left")) {
-						newPath.append("R");
+						newPath += "R";
 						side = "right";
 					} else {
-						newPath.append("L");
+						newPath += "L";
 						side = "left";
 					}
 					break;
 				}
 				default:{
-					newPath.append(path.charAt(i));
+					newPath += path.charAt(i);
 				}
 			}
 		}
