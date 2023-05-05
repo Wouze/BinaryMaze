@@ -1,4 +1,3 @@
-import java.net.CacheRequest;
 
 public class MazeSolver<T> {
 
@@ -11,7 +10,6 @@ public class MazeSolver<T> {
 //	whereas the paths "S-T-X" and "S-T-S" are not valid.
 	private boolean follow(MNode <T> t, String path)
 	{return true;}
-
 	
 	
 //	Write the method private boolean escape(MNode <T> t), which searches for an
