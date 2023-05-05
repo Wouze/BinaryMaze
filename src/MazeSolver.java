@@ -75,32 +75,32 @@ public class MazeSolver<T> {
 	}
 	
 	public static String translateToLeftRight(String path) {
-		StringBuilder newPath = new StringBuilder();
+		String newPath = "";
 		String side = "left";
 
 		for (int i = 0; i < path.length(); i++) {
 			switch (path.charAt(i)) {
 				case 'S': {
 					if (side.equals("left")) {
-						newPath.append("L");
+						newPath += "L";
 					} else {
-						newPath.append("R");
+						newPath += "R";
 					}
 					break;
 				}
 
 				case 'T': {
 					if (side.equals("left")) {
-						newPath.append("R");
+						newPath += "R";
 						side = "right";
 					} else {
-						newPath.append("L");
+						newPath += "L";
 						side = "left";
 					}
 					break;
 				}
 				default:{
-					newPath.append(path.charAt(i));
+					newPath += path.charAt(i);
 				}
 			}
 		}
