@@ -9,18 +9,9 @@ public class MazeSolver<T> {
 //	directions are available (not necessarily leading to an exit).
 //	For example, In the maze shown above, the paths: "T-T", "T-T-X", "S-T" are valid,
 //	whereas the paths "S-T-X" and "S-T-S" are not valid.
-	private boolean follow(MNode <T> t, String path){
-		String new_path = translateToLeftRight(path);
+	private boolean follow(MNode <T> t, String path)
+	{return true;}
 
-		for (int i= 0; i<new_path.length(); i++){
-			switch (new_path.charAt(i)){
-				case 'R':
-					break;
-			}
-		}
-
-		return true;
-	}
 	
 	
 //	Write the method private boolean escape(MNode <T> t), which searches for an
