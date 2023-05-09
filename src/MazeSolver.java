@@ -10,29 +10,29 @@ public class MazeSolver<T> {
 //	whereas the paths "S-T-X" and "S-T-S" are not valid.
 	private boolean follow(MNode <T> t, String path){
 		String new_path = translateToLeftRight(path);
-
+		MNode<T> tmp = t;
 		for (int i= 0; i<new_path.length(); i++){
 			switch (new_path.charAt(i)){
 
 				case 'R':
-					if (t.right == null)
+					if (tmp.right == null)
 						return false;
-					t = t.right;
+					tmp = tmp.right;
 					break;
 
 				case 'L':
-					if (t.left == null)
+					if (tmp.left == null)
 						return false;
-					t = t.left;
+					tmp = tmp.left;
 					break;
 				
 				case 'X':
-					if (!t.data.equals('X'))
+					if (!tmp.data.equals('X'))
 						return false;
 					break;
 					
 				case 'B':
-					if (!t.data.equals('B'))
+					if (!tmp.data.equals('B'))
 						return false;
 					break;
 			}
