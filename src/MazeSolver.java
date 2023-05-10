@@ -74,6 +74,22 @@ public class MazeSolver<T> {
 		return right.length() > left.length()?right:left;
 	}
 	
+	public static String TranslateToST(String RL) {
+
+		String path = "";
+		if(RL.charAt(0) == 'L')
+			path += 'S';
+		else
+			path += 'T';
+		for (int i = 1; i < RL.length(); i++) {
+			if(RL.charAt(i-1) == RL.charAt(i))
+				path += 'S';
+			else
+				path += 'T';
+		}
+		return path;
+	}
+	
 	public static String translateToLeftRight(String path) {
 		String newPath = "";
 		String side = "left";
