@@ -7,7 +7,7 @@ public class testMaze {
 		String nn = "BTTSTTTX";
 		
 		System.out.println(MazeSolver.translateToLeftRight(nn));
-		
+		System.out.println(MazeSolver.TranslateToST("RRRR"));
 		
 	}
 
