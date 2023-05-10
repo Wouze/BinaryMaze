@@ -1,7 +1,7 @@
 
 public class MazeSolver<T> {
 
-    private MNode root;
+    private MNode<T> root;
 
 //	Write the method private boolean follow(MNode <T> t, String path), which tests
 //	if the path indicated by path and starting from t is valid. A path is valid if its
