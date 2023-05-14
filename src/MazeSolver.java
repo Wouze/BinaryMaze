@@ -3,6 +3,35 @@ public class MazeSolver<T> {
 
     private MNode<T> root;
 
+	public void theMaze() {
+    	
+    	theMazehelper("SSS");
+    	theMazehelper("TSSSX");
+    	theMazehelper("TTSS");
+    	theMazehelper("TTTST");
+    	theMazehelper("TTSTTTSX");
+    }
+    private void theMazehelper(String pathST) {
+    	
+    	String pathRL = translateToLeftRight(pathST);
+    	MNode<T> tmp = root;
+    	for(int i = 0; i < pathRL.length(); i++) {
+    		if(pathRL.charAt(i) == 'L') {
+    			tmp.left = new MNode<T>();
+    			tmp = tmp.left;
+    		}
+    		else if(pathRL.charAt(i) == 'R'){
+    			tmp.right = new MNode<T>();
+    			tmp = tmp.right;
+    		}
+    		else if(pathRL.charAt(i) == 'X') {
+    			tmp.data = 'X' ;
+    			tmp.data = new T('X');
+    			tmp.data = new Character('X');
+    			tmp.data = (T) new Character('X');
+    		}
+    	}	
+    }
 //	Write the method private boolean follow(MNode <T> t, String path), which tests
 //	if the path indicated by path and starting from t is valid. A path is valid if its
 //	directions are available (not necessarily leading to an exit).
