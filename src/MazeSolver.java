@@ -1,8 +1,26 @@
 
 public class MazeSolver<T> {
 
-    private MNode<T> root;
+    private MNode<T> root = new MNode<T>((T) Character.valueOf('X'));
 
+    public void addPathToTree(String pathST) {
+    	
+    	String pathRL = translateToLeftRight(pathST);
+    	MNode<T> tmp = root;
+    	for(int i = 0; i < pathRL.length(); i++) {
+    		if(pathRL.charAt(i) == 'L') {
+    			tmp.left = new MNode<T>((T) Character.valueOf('L'));
+    			tmp = tmp.left;
+    		}
+    		else if(pathRL.charAt(i) == 'R'){
+    			tmp.right = new MNode<T>((T) Character.valueOf('R'));
+    			tmp = tmp.right;
+    		}
+    		else if(pathRL.charAt(i) == 'X') {
+    			tmp.data = (T) Character.valueOf('X');
+    		}
+    	}	
+    }
 //	Write the method private boolean follow(MNode <T> t, String path), which tests
 //	if the path indicated by path and starting from t is valid. A path is valid if its
 //	directions are available (not necessarily leading to an exit).
@@ -53,7 +71,7 @@ public class MazeSolver<T> {
 //	Write the method private String short(), which returns the shortest path to an exit
 //	starting at the root.
 //	For example, In the maze shown above, the shortest path is: "B-T-S-S-X"
-	private String shortest() {
+	public String shortest() {
 		if (root == null) return "";
 
 		return findShortest(root);
