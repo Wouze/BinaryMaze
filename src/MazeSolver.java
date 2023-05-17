@@ -1,7 +1,7 @@
 
 public class MazeSolver<T> {
 
-    private MNode<T> root = new MNode<T>((T) Character.valueOf('X'));
+    private MNode<T> root = new MNode<T>((T) Character.valueOf('B'));
 
     public void addPathToTree(String pathST) {
     	
@@ -9,11 +9,13 @@ public class MazeSolver<T> {
     	MNode<T> tmp = root;
     	for(int i = 0; i < pathRL.length(); i++) {
     		if(pathRL.charAt(i) == 'L') {
-    			tmp.left = new MNode<T>((T) Character.valueOf('L'));
+				if (tmp.left == null)
+					tmp.left = new MNode<T>((T) Character.valueOf('L'));
     			tmp = tmp.left;
     		}
     		else if(pathRL.charAt(i) == 'R'){
-    			tmp.right = new MNode<T>((T) Character.valueOf('R'));
+				if (tmp.right == null)
+    				tmp.right = new MNode<T>((T) Character.valueOf('R'));
     			tmp = tmp.right;
     		}
     		else if(pathRL.charAt(i) == 'X') {
@@ -88,8 +90,10 @@ public class MazeSolver<T> {
 		if (escape(t.right)){
 			right = "R" + findShortest(t.right);
 		}
+		if(right == "") return left;
+		if(left == "") return right;
 		
-		return right.length() > left.length()?right:left;
+		return right.length() > left.length()?left:right;
 	}
 	
 	public static String TranslateToST(String RL) {
@@ -113,30 +117,28 @@ public class MazeSolver<T> {
 		String side = "left";
 
 		for (int i = 0; i < path.length(); i++) {
-			switch (path.charAt(i)) {
-				case 'S': {
-					if (side.equals("left")) {
-						newPath += "L";
-					} else {
-						newPath += "R";
-					}
-					break;
+
+			if (path.charAt(i) == 'S') 
+
+				if (side.equals("left"))
+				  newPath += "L";
+				else
+				  newPath += "R";
+				
+
+			else if (path.charAt(i) == 'T') 
+				
+				if (side.equals("left")) {
+				  newPath += "R";
+				  side = "right";
+				} else {
+				  newPath += "L";
+				  side = "left";
 				}
 
-				case 'T': {
-					if (side.equals("left")) {
-						newPath += "R";
-						side = "right";
-					} else {
-						newPath += "L";
-						side = "left";
-					}
-					break;
-				}
-				default:{
-					newPath += path.charAt(i);
-				}
-			}
+			else 
+				newPath += path.charAt(i);
+			  
 		}
 
 		return newPath.toString();
