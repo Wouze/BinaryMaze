@@ -76,7 +76,7 @@ public class MazeSolver<T> {
 	public String shortest() {
 		if (root == null) return "";
 
-		return findShortest(root);
+		return findShortest(root) + 'X';
 	}
 
 	private String findShortest(MNode <T> t){
@@ -92,7 +92,7 @@ public class MazeSolver<T> {
 		}
 		if(right == "") return left;
 		if(left == "") return right;
-		
+
 		return right.length() > left.length()?left:right;
 	}
 	
@@ -104,7 +104,11 @@ public class MazeSolver<T> {
 		else
 			path += 'T';
 		for (int i = 1; i < RL.length(); i++) {
-			if(RL.charAt(i-1) == RL.charAt(i))
+
+			if (RL.charAt(i) == 'X' || RL.charAt(i) == 'B')
+				path += RL.charAt(i);
+
+			else if(RL.charAt(i-1) == RL.charAt(i))
 				path += 'S';
 			else
 				path += 'T';

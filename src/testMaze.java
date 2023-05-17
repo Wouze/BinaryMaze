@@ -12,12 +12,13 @@ public class testMaze {
 		MazeSolver<Character> maze = new MazeSolver<Character>();
 
 		maze.addPathToTree("SSS");
-    	maze.addPathToTree("TSSSX");
+    	maze.addPathToTree("TSSX");
     	maze.addPathToTree("TTSS");
     	maze.addPathToTree("TTTST");
     	maze.addPathToTree("TTSTTTSX");
 
 		System.out.println("Shortest path: "+maze.shortest());
+		System.out.println("Shortest path: "+MazeSolver.TranslateToST(maze.shortest()));
 	}
 
 }
