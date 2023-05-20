@@ -1,11 +1,33 @@
 
+/***********************************
+CLASS: MazeSolver
+CSC212 Data structures - Project phase I
+Spring 2023
+
+DATE:
+	20-05-2023
+
+TEAM:
+	Team RED
+
+AUTHORS:
+	Osama Alajaji,       (ID443100980)
+	Mohammad Alkhenizan, (ID443102405)
+
+***********************************/
+
+
 public class MazeSolver<T> {
 
-    private MNode<T> root = new MNode<T>((T) Character.valueOf('B'));
+	// we had to use (T) Character.valueOf('B') in all of the code assignment,
+	// because node data is generic, and we found this way to assign value to it
+    private MNode<T> root = new MNode<T>((T) Character.valueOf('B')); 
 
-    public void addPathToTree(String pathST) {
-    	
-    	String pathRL = translateToLeftRight(pathST);
+	// This method is used to construct the maze nodes inside it
+	// It takes a path and traverse it while adding nodes
+    public void addPathToTree(String path) {
+    	String pathRL = translateToLeftRight(path);
+		
     	MNode<T> tmp = root;
     	for(int i = 0; i < pathRL.length(); i++) {
     		if(pathRL.charAt(i) == 'L') {
@@ -23,46 +45,43 @@ public class MazeSolver<T> {
     		}
     	}	
     }
-//	Write the method private boolean follow(MNode <T> t, String path), which tests
-//	if the path indicated by path and starting from t is valid. A path is valid if its
-//	directions are available (not necessarily leading to an exit).
-//	For example, In the maze shown above, the paths: "T-T", "T-T-X", "S-T" are valid,
-//	whereas the paths "S-T-X" and "S-T-S" are not valid.
-	private boolean follow(MNode <T> t, String path){
-		String new_path = translateToLeftRight(path);
-		MNode<T> tmp = t; // initialization = 1 
-		for (int i= 0; i<new_path.length(); i++){ // loop n+1
-			switch (new_path.charAt(i)){ // switch statment 1*n
 
-				case 'R': //1*n
+	// Checks if the path exsists at node t
+	private boolean follow(MNode <T> t, String path){
+		String pathRL = translateToLeftRight(path);
+
+		MNode<T> tmp = t; 
+		for (int i= 0; i<pathRL.length(); i++){ 
+			switch (pathRL.charAt(i)){ 
+
+				case 'R': 
 					if (tmp.right == null)
 						return false;
 					tmp = tmp.right;
 					break;
 
-				case 'L': //1*n
+				case 'L': 
 					if (tmp.left == null)
 						return false;
 					tmp = tmp.left;
 					break;
 				
-				case 'X': //1*n
+				case 'X': 
 					if (!tmp.data.equals('X'))
 						return false;
 					break;
 					
-				case 'B': //1*n
+				case 'B': 
 					if (!tmp.data.equals('B'))
 						return false;
 					break;
 			}
 		}
 
-		return true; // 1 
+		return true; 
 	}
 	
-//	Write the method private boolean escape(MNode <T> t), which searches for an
-//	exit starting at t using preorder traversal and returns true if it finds one. 
+	// Checks if exsit exsists at node t
 	private boolean escape(MNode <T> t) {
 		if (t == null) return false;
 		if (t.data.equals('X')) return true;
@@ -70,56 +89,63 @@ public class MazeSolver<T> {
 		return escape(t.left) || escape(t.right);
 	}
 
-//	Write the method private String short(), which returns the shortest path to an exit
-//	starting at the root.
-//	For example, In the maze shown above, the shortest path is: "B-T-S-S-X"
+	// Find shortest, using the helper method findShortest(MNode <T> t)
+	// Will return path in Straight Turn format
 	public String shortest() {
 		if (root == null) return "";
 
 		return findShortest(root) + 'X';
 	}
-
+	
+	// Method to find shortest path using recursion and operating system stack
+	// Will return path in Left Right format
 	private String findShortest(MNode <T> t){
 		String left = "";
 		String right = "";
 		
 		if (!escape(t)) return "";
-		if (escape(t.left)){
+
+		if (escape(t.left))
 			left = "L" + findShortest(t.left);
-		}
-		if (escape(t.right)){
+		
+		if (escape(t.right))
 			right = "R" + findShortest(t.right);
-		}
+		
+
 		if(right == "") return left;
 		if(left == "") return right;
 
-		return right.length() > left.length()?left:right;
+		return right.length() > left.length()? left:right; // Big brain line :)
 	}
 	
-	public static String TranslateToST(String RL) {
-
-		String path = "";
-		if(RL.charAt(0) == 'L')
-			path += 'S';
-		else
-			path += 'T';
-		for (int i = 1; i < RL.length(); i++) {
-
-			if (RL.charAt(i) == 'X' || RL.charAt(i) == 'B')
-				path += RL.charAt(i);
-
-			else if(RL.charAt(i-1) == RL.charAt(i))
-				path += 'S';
-			else
-				path += 'T';
-		}
-		return path;
-	}
-	
-	public static String translateToLeftRight(String path) {
+	// Helper static method to translate path from Left Right, to Straight Turn 
+	public static String translateToStraightTurn(String path) {
 		String newPath = "";
+		
+		if(path.charAt(0) == 'L')
+		newPath += 'S';
+		else
+		newPath += 'T';
+		
+		for (int i = 1; i < path.length(); i++) {
+			
+			if (path.charAt(i) == 'X' || path.charAt(i) == 'B')
+			newPath += path.charAt(i);
+			
+			else if(path.charAt(i-1) == path.charAt(i))
+			newPath += 'S';
+			
+			else
+			newPath += 'T';
+		}
+		return newPath;
+	}
+	
+	// Helper static method to translate path from Straight Turn, to Left Right 
+	public static String translateToLeftRight(String path) {
 		String side = "left";
-
+		String newPath = "";
+		
 		for (int i = 0; i < path.length(); i++) {
 
 			if (path.charAt(i) == 'S') 
@@ -145,81 +171,8 @@ public class MazeSolver<T> {
 			  
 		}
 
-		return newPath.toString();
+		return newPath;
 	}
 
 }
 
-
-
-
-//class MNode<T> {
-//    public T data;
-//    public MNode<T> left, right;
-//
-//    public MNode(T data) {
-//        this.data = data;
-//        this.left = null;
-//        this.right = null;
-//    }
-//}
-//
-//
-//public class MazeSolver<T> {
-//
-//    private MNode<T> root;
-//
-//    public MazeSolver(MNode<T> root) {
-//        this.root = root;
-//    }
-//
-//    private boolean follow(MNode<T> t, String path) {
-//        if (t == null) {
-//            return false;
-//        }
-//        if (path.length() == 0) {
-//            return true;
-//        }
-//        char direction = path.charAt(0);
-//        if (direction == 'L') {
-//            return follow(t.left, path.substring(1));
-//        } else if (direction == 'R') {
-//            return follow(t.right, path.substring(1));
-//        }
-//        return false;
-//    }
-//
-//    private boolean escape(MNode<T> t) {
-//        if (t == null) {
-//            return false;
-//        }
-//        if (t.data.equals('X')) {
-//            return true;
-//        }
-//        return escape(t.left) || escape(t.right);
-//    }
-//
-//    private String shortestPathHelper(MNode<T> t, String pathSoFar) {
-//        if (t == null) {
-//            return null;
-//        }
-//        if (t.data.equals('X')) {
-//            return pathSoFar;
-//        }
-//        String leftPath = shortestPathHelper(t.left, pathSoFar + "L");
-//        String rightPath = shortestPathHelper(t.right, pathSoFar + "R");
-//        if (leftPath == null) {
-//            return rightPath;
-//        } else if (rightPath == null) {
-//            return leftPath;
-//        } else {
-//            return leftPath.length() < rightPath.length() ? leftPath : rightPath;
-//        }
-//    }
-//
-//    private String shortestPath() {
-//        return shortestPathHelper(root, "");
-//    }
-//
-//}
-//
