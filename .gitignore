@@ -1,1 +1,3 @@
 src/*.class
+src/GUI/*.class
+src/MainProj/*.class
