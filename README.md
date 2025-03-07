@@ -1,8 +1,26 @@
 # Binary-maze
-A player wants to escape a maze where at most two options are available at each step: go
-straight or turn. This maze can be represented by a binary tree where the data is a character
-that can take four values: ’B’ for begin (only at the root), ’S’ for go straight, ’T’ for turn, or
-’X’ meaning this is an exit. Exits are located at leaf nodes only, but not all leaf nodes are
-exits, they could be dead ends.
+--------------------------
+Welcome to **Binary-maze**!
+- This project have been made with Java for CSC212 project!
+- It uses the Binary tree data structure, and make some visuals on it!
 
+# Preview
+
+https://github.com/user-attachments/assets/489df300-5ae2-4089-a84b-945a9eba4eca
+
+##  💪 Team Project 💪
+This project was developed as part of CSC212 class with my 2 classmates.
+
+## 🌟 Key Features 🌟
+
+- **Simple**: Very simple project, you can easily check the code and modify as you want. 🛠️
+- **Visuals**: Have GUI with test Binary tree maze to play with. 
+
+
+## 🔧 Technologies Used 🔧
+
+- **Java Programming Language** 💻
+- **Java GUI library**
+# Additional informations
+- Check the pdf for more informations!
 [CSC 212 Project phase 1 v2.pdf](https://github.com/user-attachments/files/19117151/CSC.212.Project.phase.1.v2.pdf)
