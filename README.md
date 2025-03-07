@@ -4,3 +4,5 @@ straight or turn. This maze can be represented by a binary tree where the data i
 that can take four values: ’B’ for begin (only at the root), ’S’ for go straight, ’T’ for turn, or
 ’X’ meaning this is an exit. Exits are located at leaf nodes only, but not all leaf nodes are
 exits, they could be dead ends.
+
+[CSC 212 Project phase 1 v2.pdf](https://github.com/user-attachments/files/19117151/CSC.212.Project.phase.1.v2.pdf)
